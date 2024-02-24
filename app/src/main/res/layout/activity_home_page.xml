@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/wallpaper1">
+
+    <!-- Include your app bar layout -->
+
+    <include layout="@layout/app_bar_layout" />
+
+    <!-- Mood Question TextView -->
+    <TextView
+        android:id="@+id/mood_question"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="104dp"
+        android:textColor="@color/white"
+        android:text="@string/whats_your_mood"
+        android:textSize="24sp" />
+
+    <!-- Date Text Formatted TextView -->
+    <TextView
+        android:id="@+id/date_text_formatted"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/mood_question"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp"
+        android:text="Date"
+        android:textSize="18sp" />
+
+    <!-- Emoji Container LinearLayout -->
+
+    <!-- Save Button -->
+
+
+    <!-- Bottom Navigation View -->
+
+    <LinearLayout
+        android:id="@+id/emoji_container"
+        android:layout_width="358dp"
+        android:layout_height="82dp"
+        android:layout_below="@+id/date_text_formatted"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="21dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="32dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:padding="10dp">
+
+        <ImageButton
+            android:id="@+id/emoji_rad"
+            android:layout_width="150px"
+            android:layout_height="150px"
+            android:layout_marginEnd="1dp"
+            android:layout_weight="2"
+            android:backgroundTint="@color/white"
+            android:scaleType="fitCenter"
+            android:src="@drawable/bliss" />
+
+        <ImageButton
+            android:id="@+id/emoji_happy"
+            android:layout_width="150px"
+            android:layout_height="150px"
+            android:layout_marginEnd="1dp"
+            android:layout_weight="2"
+            android:backgroundTint="@color/white"
+            android:scaleType="fitCenter"
+            android:src="@drawable/happy" />
+
+        <ImageButton
+            android:id="@+id/emoji_meh"
+            android:layout_width="150px"
+            android:layout_height="150px"
+            android:layout_gravity="center"
+            android:layout_marginEnd="1dp"
+            android:layout_weight="2"
+            android:backgroundTint="@color/white"
+            android:scaleType="fitCenter"
+            android:src="@drawable/confused" />
+
+        <ImageButton
+            android:id="@+id/emoji_unhappy"
+            android:layout_width="150px"
+            android:layout_height="150px"
+            android:layout_marginEnd="1dp"
+            android:layout_weight="2"
+            android:backgroundTint="@color/white"
+            android:scaleType="fitCenter"
+            android:src="@drawable/sad" />
+
+        <ImageButton
+            android:id="@+id/emoji_anxious"
+            android:layout_width="150px"
+            android:layout_height="150px"
+            android:layout_marginEnd="1dp"
+            android:layout_weight="2"
+            android:backgroundTint="@color/white"
+            android:scaleType="fitCenter"
+            android:src="@drawable/anxious" />
+
+        <ImageButton
+            android:id="@+id/emoji_angry"
+            android:layout_width="150px"
+            android:layout_height="150px"
+            android:layout_marginEnd="1dp"
+            android:layout_weight="2"
+            android:backgroundTint="@color/white"
+            android:scaleType="fitCenter"
+            android:src="@drawable/anger" />
+
+    </LinearLayout>
+
+    <include
+        android:id="@+id/note_input_layout"
+        layout="@layout/note_input_layout"
+        android:visibility="invisible" />
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        app:menu="@menu/bottom_navigation" />
+
+</RelativeLayout>
