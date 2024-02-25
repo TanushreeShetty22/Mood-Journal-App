@@ -24,7 +24,7 @@
     <!-- Date Text Formatted TextView -->
     <TextView
         android:id="@+id/date_text_formatted"
-        android:layout_width="wrap_content"
+        android:layout_width="80dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/mood_question"
         android:layout_centerHorizontal="true"

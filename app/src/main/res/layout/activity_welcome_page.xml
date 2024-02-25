@@ -11,27 +11,27 @@
     tools:context=".WelcomePage">
 
     <TextView
-        android:id="@+id/welcome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="180dp"
-        android:fontFamily="sans-serif-medium"
+        android:layout_marginTop="170dp"
         android:gravity="center"
         android:padding="25dp"
         android:text="Welcome to Mood Journal App!"
         android:textColor="@color/white"
-        android:textSize="25dp" />
+        android:textSize="25dp"
+        android:fontFamily="sans-serif-medium"
+        android:id="@+id/welcome"/>
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="70dp"
-        android:fontFamily="sans-serif-medium"
         android:text="Track your mood daily and reflect on\n your emotions."
         android:textAlignment="center"
-        android:textColor="#E8C133"
-        android:textSize="20dp" />
+        android:textColor="#fce205"
+        android:textSize="20dp"
+        android:fontFamily="sans-serif-medium"/>
 
     <Button
         android:id="@+id/buttonDailyMood"
