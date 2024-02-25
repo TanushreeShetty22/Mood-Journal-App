@@ -13,7 +13,7 @@ import android.widget.Toast;
 
 public class Login extends AppCompatActivity {
 
-    private EditText usernameField;
+    private EditText emailField;
     private EditText passwordField;
     private Button loginButton;
     private TextView signupText;
@@ -23,7 +23,7 @@ public class Login extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        usernameField = findViewById(R.id.username_field);
+        emailField = findViewById(R.id.email_field);
         passwordField = findViewById(R.id.password_field);
         loginButton = findViewById(R.id.login_button);
         signupText = findViewById(R.id.signup_text); // Assuming you have a TextView with an ID "signup_text" in your layout
@@ -31,12 +31,12 @@ public class Login extends AppCompatActivity {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String username = usernameField.getText().toString();
+                String email = emailField.getText().toString().trim();
                 String password = passwordField.getText().toString();
 
-                if (isValidUsername(username) && isValidPassword(password)) {
+                if (isValidUsername(email) && isValidPassword(password)) {
                     // Proceed with login
-                    if (login(username, password)) {
+                    if (login(email, password)) {
                         // Start main activity or other appropriate action
                         goToHomePage();
                     } else {

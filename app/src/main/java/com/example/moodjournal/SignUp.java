@@ -13,7 +13,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class SignUp extends AppCompatActivity {
 
-    private EditText usernameField;
     private EditText emailField;
     private EditText passwordField;
     private Button signupButton;
@@ -25,7 +24,7 @@ public class SignUp extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
 
-        usernameField = findViewById(R.id.username_field);
+
         emailField = findViewById(R.id.email_field);
         passwordField = findViewById(R.id.password_field);
         signupButton = findViewById(R.id.signup_button);
@@ -40,16 +39,16 @@ public class SignUp extends AppCompatActivity {
         signupButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String username = usernameField.getText().toString().trim();
+
                 String email = emailField.getText().toString().trim();
                 String password = passwordField.getText().toString().trim();
-                if (username.isEmpty() || email.isEmpty() || password.isEmpty()) {
+                if (email.isEmpty() || password.isEmpty()) {
                     // Show error message to user
                     Toast.makeText(SignUp.this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 // Replace with your sign-up logic and handle errors
-                if (signup(username, email, password)) {
+                if (signup(email, password)) {
                     // Start main activity or other appropriate action
                    goToHomePage();
                 } else {
@@ -61,7 +60,7 @@ public class SignUp extends AppCompatActivity {
     }
 
     // Implement your sign-up logic here
-    private boolean signup(String username, String email, String password) {
+    private boolean signup(String username, String email) {
         // ... save user data and handle sign-up process
         return true; // Replace with actual logic
     }

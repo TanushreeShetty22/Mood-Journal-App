@@ -15,7 +15,7 @@
         android:layout_width="77dp"
         android:layout_height="65dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="100dp"
         android:src="@drawable/psychologo" />
 
     <TextView
@@ -53,28 +53,14 @@
             android:layout_width="match_parent"
             android:layout_height="55dp"
             android:layout_marginTop="16dp"
-            android:hint="@string/username"
-            android:inputType="textEmailAddress"
-            android:textColor="@color/white"
-            android:textColorHint="@color/white"/>
-</com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="55dp">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/email_field"
-            android:layout_width="match_parent"
-            android:layout_height="55dp"
-            android:layout_below="@+id/username_field"
-            android:layout_marginTop="16dp"
             android:hint="@string/email"
             android:inputType="textEmailAddress"
             android:textColor="@color/white"
             android:textColorHint="@color/white"
             android:drawableRight="@drawable/email"/>
-        </com.google.android.material.textfield.TextInputLayout>
+</com.google.android.material.textfield.TextInputLayout>
+
+
  <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="55dp">
@@ -105,16 +91,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginTop="10dp">
-        <TextView
-            android:id="@+id/already_have_an_account_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="@string/already_have_an_account"
-            android:textColor="@color/white"
-            android:paddingLeft="48dp"
-            android:textSize="15dp"
-            android:fontFamily="sans-serif-medium"/>
+
+    <TextView
+        android:id="@+id/already_have_an_account_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:fontFamily="sans-serif-medium"
+        android:paddingLeft="48dp"
+        android:text="@string/already_have_an_account"
+        android:textColor="@color/white"
+        android:textSize="16sp" />
 
     <TextView
         android:id="@+id/login_text"
@@ -124,11 +111,11 @@
         android:layout_marginStart="5dp"
         android:layout_marginTop="-21dp"
         android:layout_toEndOf="@+id/already_have_an_account_text"
+        android:fontFamily="sans-serif-medium"
         android:text="@string/login"
-        android:textStyle="bold"
-        android:textColor="@color/white"
-        android:textSize="15dp"
-        android:fontFamily="sans-serif-medium"/>
+        android:textColor="#E8DE86"
+        android:textSize="16sp"
+        android:textStyle="bold" />
 </RelativeLayout>
 
     </LinearLayout>
