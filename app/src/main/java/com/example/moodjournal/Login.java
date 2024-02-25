@@ -1,7 +1,5 @@
 package com.example.moodjournal;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -9,6 +7,15 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 
 public class Login extends AppCompatActivity {
@@ -18,6 +25,16 @@ public class Login extends AppCompatActivity {
     private Button loginButton;
     private TextView signupText;
 
+    FirebaseAuth mAuth;
+    @Override
+    public void onStart() {
+        super.onStart();
+        // Check if user is signed in (non-null) and update UI accordingly.
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        if(currentUser != null){
+            goToWelcomePage();
+        }
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,21 +51,43 @@ public class Login extends AppCompatActivity {
                 String email = emailField.getText().toString().trim();
                 String password = passwordField.getText().toString();
 
-                if (isValidUsername(email) && isValidPassword(password)) {
+                if (isValidEmail(email) && isValidPassword(password)) {
                     // Proceed with login
+
                     if (login(email, password)) {
                         // Start main activity or other appropriate action
-                        goToHomePage();
+                        goToWelcomePage();
                     } else {
                         // Show error message to user for login failure
                         showError("Invalid credentials. Please try again.");
                     }
-                } else {
+                }
+                else {
                     // Show error message to user for invalid input
                     showError("Invalid username or password. Please check the requirements.");
                     // Additionally, show signup text and link
                     showSignupText();
                 }
+                mAuth.signInWithEmailAndPassword(email, password)
+                        .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                            @Override
+                            public void onComplete(@NonNull Task<AuthResult> task) {
+                                if (task.isSuccessful()) {
+                                    // Sign in success, update UI with the signed-in user's information
+                                    Toast.makeText(Login.this, "Login Successful.",
+                                            Toast.LENGTH_SHORT).show();
+                                    goToWelcomePage();
+
+                                } else {
+                                    // If sign in fails, display a message to the user.
+
+                                    Toast.makeText(Login.this, "Authentication failed.",
+                                            Toast.LENGTH_SHORT).show();
+
+                                }
+                            }
+                        });
+
             }
         });
         signupText.setOnClickListener(new View.OnClickListener() {
@@ -59,7 +98,7 @@ public class Login extends AppCompatActivity {
         });
     }
 
-    private boolean isValidUsername(String username) {
+    private boolean isValidEmail(String username) {
         // Username should be alpha or alphanumeric
         return username.matches("[a-zA-Z0-9]+");
     }
@@ -74,7 +113,7 @@ public class Login extends AppCompatActivity {
         return true; // Replace with actual logic
     }
 
-    private void goToHomePage() {
+    private void goToWelcomePage() {
         // Implement the logic to start the main activity or navigate to the home page
         startActivity(new Intent(Login.this, WelcomePage.class));
     }
