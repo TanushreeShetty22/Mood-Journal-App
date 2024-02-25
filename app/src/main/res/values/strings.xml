@@ -7,7 +7,7 @@
     <string name="forgot_password">Forgot password?</string>
     <string name="sign_up">Sign Up</string>
     <string name="already_have_an_account">Already have an account?</string>
-    <string name="dont_have_an_account">Don't have an account?</string>
+    <string name="dont_have_an_account">Don\'t have an account?</string>
     <string name="email">Email</string>
     <string name="whats_your_mood">What\'s your mood today?</string>
     <string name="today_s_date">date</string>

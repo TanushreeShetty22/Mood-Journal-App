@@ -2,6 +2,7 @@ package com.example.moodjournal;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -20,12 +21,10 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class Login extends AppCompatActivity {
 
-    private EditText emailField;
-    private EditText passwordField;
+    private EditText emailField, passwordField;
     private Button loginButton;
     private TextView signupText;
-
-    FirebaseAuth mAuth;
+    private FirebaseAuth mAuth;
     @Override
     public void onStart() {
         super.onStart();
@@ -35,6 +34,7 @@ public class Login extends AppCompatActivity {
             goToWelcomePage();
         }
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,53 +43,48 @@ public class Login extends AppCompatActivity {
         emailField = findViewById(R.id.email_field);
         passwordField = findViewById(R.id.password_field);
         loginButton = findViewById(R.id.login_button);
-        signupText = findViewById(R.id.signup_text); // Assuming you have a TextView with an ID "signup_text" in your layout
+        signupText = findViewById(R.id.signup_text);
+        // Initialize the FirebaseAuth object
+        mAuth = FirebaseAuth.getInstance();
 
         loginButton.setOnClickListener(new View.OnClickListener() {
+
+
+
+
             @Override
             public void onClick(View v) {
                 String email = emailField.getText().toString().trim();
                 String password = passwordField.getText().toString();
 
                 if (isValidEmail(email) && isValidPassword(password)) {
-                    // Proceed with login
+                    mAuth.signInWithEmailAndPassword(email, password)
+                            .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                                @Override
+                                public void onComplete(@NonNull Task<AuthResult> task) {
+                                    if (task.isSuccessful()) {
+                                        // Sign in success, update UI with the signed-in user's information
 
-                    if (login(email, password)) {
-                        // Start main activity or other appropriate action
-                        goToWelcomePage();
-                    } else {
-                        // Show error message to user for login failure
-                        showError("Invalid credentials. Please try again.");
-                    }
-                }
-                else {
+                                        FirebaseUser user = mAuth.getCurrentUser();
+
+                                    } else {
+                                        // If sign in fails, display a message to the user.
+
+                                        Toast.makeText(Login.this, "Authentication failed.",
+                                                Toast.LENGTH_SHORT).show();
+
+                                    }
+                                }
+                            });
+                } else {
                     // Show error message to user for invalid input
                     showError("Invalid username or password. Please check the requirements.");
                     // Additionally, show signup text and link
                     showSignupText();
                 }
-                mAuth.signInWithEmailAndPassword(email, password)
-                        .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                if (task.isSuccessful()) {
-                                    // Sign in success, update UI with the signed-in user's information
-                                    Toast.makeText(Login.this, "Login Successful.",
-                                            Toast.LENGTH_SHORT).show();
-                                    goToWelcomePage();
-
-                                } else {
-                                    // If sign in fails, display a message to the user.
-
-                                    Toast.makeText(Login.this, "Authentication failed.",
-                                            Toast.LENGTH_SHORT).show();
-
-                                }
-                            }
-                        });
-
             }
         });
+
         signupText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -98,19 +93,14 @@ public class Login extends AppCompatActivity {
         });
     }
 
-    private boolean isValidEmail(String username) {
-        // Username should be alpha or alphanumeric
-        return username.matches("[a-zA-Z0-9]+");
+    private boolean isValidEmail(String email) {
+        // Email should be in a valid email format
+        return Patterns.EMAIL_ADDRESS.matcher(email).matches();
     }
 
     private boolean isValidPassword(String password) {
         // Password should be between 6-16 characters, alphanumeric, and contain at least one special character
         return password.length() >= 6 && password.length() <= 16 && password.matches("^(?=.*[a-zA-Z0-9])(?=.*[@#$%^&+=]).+$");
-    }
-
-    private boolean login(String username, String password) {
-        // ... check credentials against your user database or authentication service
-        return true; // Replace with actual logic
     }
 
     private void goToWelcomePage() {
@@ -124,7 +114,6 @@ public class Login extends AppCompatActivity {
         Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT).show();
     }
 
-
     private void showSignupText() {
         // Implement the logic to show the text message with a signup link
         signupText.setVisibility(View.VISIBLE);
@@ -135,6 +124,7 @@ public class Login extends AppCompatActivity {
                 // Implement the logic to navigate to the signup activity
                 startActivity(new Intent(Login.this, SignUp.class));
             }
-        });
-    }
+
+        }
+        );}
 }

@@ -43,7 +43,7 @@ dependencies {
     implementation("androidx.navigation:navigation-ui:2.7.7")
     // Import the Firebase BoM
     implementation(platform("com.google.firebase:firebase-bom:32.7.2"))
-
+    implementation ("com.google.firebase:firebase-auth:22.3.1")
     // When using the BoM, you don't specify versions in Firebase library dependencies
 
     // Add the dependency for the Firebase SDK for Google Analytics
